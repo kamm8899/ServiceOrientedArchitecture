@@ -137,7 +137,7 @@ public class ProviderService implements IProviderService {
 			if (dto instanceof DrugTreatmentDto) {
 
 				DrugTreatmentDto drugTreatmentDto = (DrugTreatmentDto) dto;
-				followUpsConsumer = provider.importtDrugTreatment(dto.getId(), patient, provider, dto.getDiagnosis(),
+				followUpsConsumer = provider.importDrugTreatment(dto.getId(), patient, provider, dto.getDiagnosis(),
 						drugTreatmentDto.getDrug(), drugTreatmentDto.getDosage(), drugTreatmentDto.getStartDate(),
 						drugTreatmentDto.getEndDate(), drugTreatmentDto.getFrequency(), parentFollowUps);
 

@@ -1,9 +1,14 @@
 package edu.stevens.cs548.clinic.domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 import java.time.LocalDate;
 
 
 //TODO JPA annotations
+@Entity
+@Table(name = "SurgeryTreatment")
 public class SurgeryTreatment extends Treatment {
 
 	/**
@@ -34,7 +39,15 @@ public class SurgeryTreatment extends Treatment {
 	@Override
 	public <T> T export(ITreatmentExporter<T> visitor) {
 		// TODO
-		return null;
+		return visitor.exportSurgery(treatmentId,
+				patient.getPatientId(),
+				patient.getName(),
+				provider.getProviderId(),
+				provider.getName(),
+				diagnosis,
+				surgeryDate,
+				dischargeInstructions,
+				() -> exportFollowupTreatments(visitor));
 	}
 	
 	public SurgeryTreatment() {

@@ -20,7 +20,7 @@ import java.util.function.Consumer;
  */
 public interface ITreatmentImporter {
 
-	public Consumer<Treatment> importtDrugTreatment(UUID tid, Patient patient, Provider provider, String diagnosis, String drug,
+	public Consumer<Treatment> importDrugTreatment(UUID tid, Patient patient, Provider provider, String diagnosis, String drug,
 			float dosage, LocalDate start, LocalDate end, int frequency, Consumer<Treatment> consumer);
 
 	public Consumer<Treatment> importRadiology(UUID tid, Patient patient, Provider provider, String diagnosis, List<LocalDate> dates,

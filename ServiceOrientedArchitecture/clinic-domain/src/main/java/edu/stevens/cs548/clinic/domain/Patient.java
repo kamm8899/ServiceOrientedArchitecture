@@ -1,12 +1,7 @@
 package edu.stevens.cs548.clinic.domain;
 
-import jakarta.persistence.Convert;
-import jakarta.persistence.Converter;
-import jakarta.persistence.Index;
-import jakarta.persistence.NamedQueries;
-import jakarta.persistence.NamedQuery;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -41,22 +36,23 @@ import edu.stevens.cs548.clinic.domain.ITreatmentDao.TreatmentExn;
 })
 
 // TODO
-
-@Table(indexes = @Index(columnList="patientId"))
+@Entity
+@Table(indexes = @Index(columnList = "patientId"))
 public class Patient implements Serializable {
 		
 	private static final long serialVersionUID = -4512912599605407549L;
 
 	// TODO PK
+	@Id
+	@GeneratedValue
 	private long id;
 	
 	// TODO
-
+	@Column(nullable = false, unique = true)
 	private UUID patientId;
 				
 	private String name;
 
-	// TODO
 	private LocalDate dob;
 	
 	public long getId() {
@@ -93,6 +89,7 @@ public class Patient implements Serializable {
 
 
 	// TODO JPA annotations (propagate deletion of patient to treatments)
+	@OneToMany(cascade = CascadeType.PERSIST,mappedBy = "patient")
 	private Collection<Treatment> treatments;
 	
 
