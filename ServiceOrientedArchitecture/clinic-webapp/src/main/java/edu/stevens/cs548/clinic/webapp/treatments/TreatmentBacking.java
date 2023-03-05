@@ -1,6 +1,7 @@
 package edu.stevens.cs548.clinic.webapp.treatments;
 
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -194,10 +195,12 @@ public class TreatmentBacking extends BaseBacking {
 	}
 
 
-	// TODO
+	// TODOX
+	@Inject
 	private IPatientService patientService;
 
-    // TODO
+    // TODOX
+	@Inject
 	private IProviderService providerService;
 	
 	

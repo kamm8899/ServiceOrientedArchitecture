@@ -13,7 +13,7 @@ public class TreatmentFactory implements ITreatmentFactory {
 	}
 
 	/*
-	 * TODO define other factory methods
+	 * TODOX define other factory methods
 	 */
 	public RadiologyTreatment createRadiologyTreatment() {
 		return new RadiologyTreatment();

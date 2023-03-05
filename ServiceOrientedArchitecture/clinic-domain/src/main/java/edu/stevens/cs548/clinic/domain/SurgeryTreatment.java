@@ -6,7 +6,7 @@ import jakarta.persistence.Table;
 import java.time.LocalDate;
 
 
-//TODO JPA annotations
+//TODOX JPA annotations
 @Entity
 @Table(name = "SurgeryTreatment")
 public class SurgeryTreatment extends Treatment {
@@ -38,7 +38,7 @@ public class SurgeryTreatment extends Treatment {
 	
 	@Override
 	public <T> T export(ITreatmentExporter<T> visitor) {
-		// TODO
+		// TODOX
 		return visitor.exportSurgery(treatmentId,
 				patient.getPatientId(),
 				patient.getName(),

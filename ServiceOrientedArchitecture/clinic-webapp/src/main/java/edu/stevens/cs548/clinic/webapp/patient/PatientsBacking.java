@@ -2,6 +2,7 @@ package edu.stevens.cs548.clinic.webapp.patient;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.util.List;
 
@@ -10,13 +11,15 @@ import edu.stevens.cs548.clinic.service.IPatientService.PatientServiceExn;
 import edu.stevens.cs548.clinic.service.dto.PatientDto;
 import edu.stevens.cs548.clinic.webapp.BaseBacking;
 
+
 @Named("patientsBacking")
 @RequestScoped
 public class PatientsBacking extends BaseBacking {
 
 	private static final long serialVersionUID = -733113325524128462L;
 	
-	// TODO
+	// TODOX
+	@Inject
 	IPatientService patientService;
 
 	/*

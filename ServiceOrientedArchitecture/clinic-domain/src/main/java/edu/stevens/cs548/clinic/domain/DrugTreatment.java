@@ -10,7 +10,7 @@ import java.time.LocalDate;
  * Entity implementation class for Entity: DrugTreatment
  * 
  */
-// TODO JPA annotations
+// TODOX JPA annotations
 
 @Entity
 @Table(name = "DrugTreatment")

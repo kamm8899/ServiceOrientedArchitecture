@@ -11,17 +11,20 @@ import java.util.List;
 import java.util.UUID;
 import java.util.logging.Logger;
 
-// TODO
+import edu.stevens.cs548.clinic.domain.ClinicDomainProducer.ClinicDomain;
+
+// TODOX
 @RequestScoped
 @Transactional
 public class ProviderDao implements IProviderDao {
 
-	// TODO
+	// TODOX
+	@Inject
+	@ClinicDomain
 	private EntityManager em;
 	
-	// TODO
+	// TODOX
 	@Inject
-	@ClinicDomainProducer.ClinicDomain
 	private ITreatmentDao treatmentDao;
 
 	private Logger logger = Logger.getLogger(ProviderDao.class.getCanonicalName());
@@ -46,7 +49,7 @@ public class ProviderDao implements IProviderDao {
 			throw new ProviderExn("Insertion: Provider with provider id (" + pid + ") already exists.");
 		}
 	}
-	}
+	
 
 	@Override
 	/*
@@ -54,7 +57,7 @@ public class ProviderDao implements IProviderDao {
 	 */
 	public Provider getProvider(UUID id, boolean includeTreatments) throws ProviderExn {
 		/*
-		 * TODO retrieve Provider using external key
+		 * TODOX retrieve Provider using external key
 		 */
 		String queryName = "SearchProviderByProviderId";
 		TypedQuery<Provider> query = em.createNamedQuery(queryName, Provider.class).setParameter("providerId",id);
@@ -86,7 +89,7 @@ public class ProviderDao implements IProviderDao {
 	@Override
 	public List<Provider> getProviders() {
 		/*
-		 * TODO Return a list of all providers (remember to set treatmentDAO)
+		 * TODOX Return a list of all providers (remember to set treatmentDAO)
 		 */
 		TypedQuery<Provider> query = em.createNamedQuery("SearchAllProviders", Provider.class);
 		List<Provider> providers = query.getResultList();

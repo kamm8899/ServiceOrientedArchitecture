@@ -1,6 +1,7 @@
 package edu.stevens.cs548.clinic.webapp.provider;
 
 import jakarta.enterprise.context.RequestScoped;
+import jakarta.inject.Inject;
 import jakarta.inject.Named;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ import edu.stevens.cs548.clinic.service.IProviderService.ProviderServiceExn;
 import edu.stevens.cs548.clinic.service.dto.ProviderDto;
 import edu.stevens.cs548.clinic.service.dto.TreatmentDto;
 import edu.stevens.cs548.clinic.webapp.BaseBacking;
+
 
 @Named("providerBacking")
 @RequestScoped
@@ -60,7 +62,8 @@ public class ProviderBacking extends BaseBacking {
 		return provider.getTreatments();
 	}
 
-	// TODO
+	// TODOX
+	@Inject
 	private IProviderService providerService;
 	
 	/**

@@ -7,11 +7,13 @@ import jakarta.ejb.Startup;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.enterprise.context.Destroyed;
 import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
 import jakarta.servlet.ServletContext;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.logging.Logger;
 
@@ -45,10 +47,12 @@ public class InitBean {
 
 	private TreatmentDtoFactory treatmentFactory = new TreatmentDtoFactory();
 
-	// TODO
+	// TODOX
+	@Inject
 	private IPatientService patientService;
 
-	// TODO
+	// TODOX
+	@Inject
 	private IProviderService providerService;
 
 	/*
@@ -66,8 +70,8 @@ public class InitBean {
 		 * Put your testing logic here. Use the logger to display testing output in the
 		 * server logs.
 		 */
-		logger.info("Your name here: ");
-		System.err.println("Your name here!");
+		logger.info("Jessica Kamman: ");
+		System.err.println("Jessica Kamman");
 
 		try {
 
@@ -83,15 +87,34 @@ public class InitBean {
 			PatientDto john = patientFactory.createPatientDto();
 			john.setName("John Doe");
 			john.setDob(LocalDate.parse("1995-08-15"));
-
 			john.setId(patientService.addPatient(john));
+			
+			PatientDto bob = patientFactory.createPatientDto();
+			bob.setName("Bob Oldsman");
+			bob.setDob(LocalDate.parse("1960-02-15"));
+			bob.setId(patientService.addPatient(bob));
+			
+			PatientDto sally = patientFactory.createPatientDto();
+			sally.setName("Sally Doe");
+			sally.setDob(LocalDate.parse("2000-11-05"));
+			sally.setId(patientService.addPatient(sally));
 
 			ProviderDto jane = providerFactory.createProviderDto();
 			jane.setName("Jane Doe");
 			jane.setNpi("1234");
-
 			jane.setId(providerService.addProvider(jane));
-
+			
+			ProviderDto betty = providerFactory.createProviderDto();
+			betty.setName("Betty Bet");
+			betty.setNpi("4567");
+			betty.setId(providerService.addProvider(betty));
+			
+			ProviderDto sam = providerFactory.createProviderDto();
+			sam.setName("Sam");
+			sam.setNpi("8901");
+			sam.setId(providerService.addProvider(sam));
+			
+//--JOHN's 2 TREATMENTS with Jane ---
 			DrugTreatmentDto drug01 = treatmentFactory.createDrugTreatmentDto();
 			drug01.setPatientId(john.getId());
 			drug01.setPatientName(john.getName());
@@ -106,10 +129,111 @@ public class InitBean {
 
 			providerService.addTreatment(drug01);
 
-			// TODO add more testing, including treatments and providers
+			// TODOX add more testing, including treatments and providers
+			RadiologyTreatmentDto rad01 = treatmentFactory.createRadiologyTreatmentDto();
+			rad01.setPatientId(john.getId());
+			rad01.setPatientName(john.getName());
+			rad01.setProviderId(jane.getId());
+			rad01.setProviderName(jane.getName());
+			rad01.setDiagnosis("radiology needed");
+			ArrayList<LocalDate> radiologyDates = new ArrayList<LocalDate>();
+			radiologyDates.add(LocalDate.parse("2023-01-08"));
+			radiologyDates.add(LocalDate.parse("2023-01-18"));
+			radiologyDates.add(LocalDate.parse("2023-01-24"));
+			rad01.setTreatmentDates(radiologyDates);
 			
-			// Now show in the logs what has been added
+			providerService.addTreatment(rad01);
+			
+			//-------BOBS 2 TREATMENTS with Betty
 
+			SurgeryTreatmentDto surg01 = treatmentFactory.createSurgeryTreatmentDto();
+			surg01.setPatientId(bob.getId());
+			surg01.setPatientName(bob.getName());
+			surg01.setProviderId(betty.getId());
+			surg01.setProviderName(betty.getName());
+			surg01.setDiagnosis("broken leg");
+			// Now show in the logs what has been added
+			surg01.setDischargeInstructions("rest");
+			surg01.setSurgeryDate(LocalDate.parse("2023-02-02"));
+			
+			providerService.addTreatment(surg01);
+			
+			PhysiotherapyTreatmentDto phys01 = treatmentFactory.createPhysiotherapyTreatmentDto();
+			phys01.setPatientId(bob.getId());
+			phys01.setPatientName(bob.getName());
+			phys01.setProviderId(betty.getId());
+			phys01.setProviderName(betty.getName());
+			phys01.setDiagnosis("need physiotherapy");
+			ArrayList<LocalDate> physiotherapyDates = new ArrayList<LocalDate>();
+			physiotherapyDates.add(LocalDate.parse("2023-02-08"));
+			physiotherapyDates.add(LocalDate.parse("2023-02-23"));
+			physiotherapyDates.add(LocalDate.parse("2023-02-28"));
+			phys01.setTreatmentDates(physiotherapyDates);
+			
+			providerService.addTreatment(phys01);
+			
+			
+			//--Sally 2 treatments with sam
+			DrugTreatmentDto drug02 = treatmentFactory.createDrugTreatmentDto();
+			drug02.setPatientId(sally.getId());
+			drug02.setPatientName(sally.getName());
+			drug02.setProviderId(sam.getId());
+			drug02.setProviderName(sam.getName());
+			drug02.setDiagnosis("Headache");
+			drug02.setDrug("Aspirin");
+			drug02.setDosage(10);
+			drug02.setFrequency(3);
+			drug02.setStartDate(LocalDate.ofInstant(Instant.now(), ZONE_ID));
+			drug02.setEndDate(LocalDate.ofInstant(Instant.now(), ZONE_ID));
+
+			providerService.addTreatment(drug02);
+			
+			SurgeryTreatmentDto surg02 = treatmentFactory.createSurgeryTreatmentDto();
+			surg02.setPatientId(sally.getId());
+			surg02.setPatientName(sally.getName());
+			surg02.setProviderId(sam.getId());
+			surg02.setProviderName(sam.getName());
+			surg02.setDiagnosis("broken leg");
+			// Now show in the logs what has been added
+			surg02.setDischargeInstructions("rest");
+			surg02.setSurgeryDate(LocalDate.parse("2023-04-02"));
+			//add physiotherapy follow up dates for surgery
+
+			DrugTreatmentDto followUpDrug = treatmentFactory.createDrugTreatmentDto();
+			followUpDrug.setPatientId(sally.getId());
+			followUpDrug.setPatientName(sally.getName());
+			followUpDrug.setProviderId(sam.getId());
+			followUpDrug.setProviderName(sam.getName());
+			followUpDrug.setDiagnosis("Stomach");
+			followUpDrug.setDrug("Aspirin");
+			followUpDrug.setDosage(10);
+			followUpDrug.setFrequency(3);
+			followUpDrug.setStartDate(LocalDate.ofInstant(Instant.now(), ZONE_ID));
+			followUpDrug.setEndDate(LocalDate.ofInstant(Instant.now(), ZONE_ID));
+
+			DrugTreatmentDto followUpDrug2 = treatmentFactory.createDrugTreatmentDto();
+			followUpDrug2.setPatientId(sally.getId());
+			followUpDrug2.setPatientName(sally.getName());
+			followUpDrug2.setProviderId(sam.getId());
+			followUpDrug2.setProviderName(sam.getName());
+			followUpDrug2.setDiagnosis("Sore");
+			followUpDrug2.setDrug("Aspirin");
+			followUpDrug2.setDosage(3);
+			followUpDrug2.setFrequency(2);
+			followUpDrug2.setStartDate(LocalDate.ofInstant(Instant.now(), ZONE_ID));
+			followUpDrug2.setEndDate(LocalDate.ofInstant(Instant.now(), ZONE_ID));
+
+			//add physiotherapy follow up dates for surgery
+			ArrayList<TreatmentDto> followUpTreatments = new ArrayList<>();
+			followUpTreatments.add(followUpDrug);
+			followUpTreatments.add(followUpDrug2);
+			surg02.setFollowupTreatments(followUpTreatments);
+
+
+			providerService.addTreatment(surg02);
+			
+			
+			
 			Collection<PatientDto> patients = patientService.getPatients();
 			for (PatientDto p : patients) {
 				logger.info(String.format("Patient %s, ID %s, DOB %s", p.getName(), p.getId().toString(),
@@ -128,7 +252,7 @@ public class InitBean {
 			throw new IllegalStateException("Failed to add record.", e);
 
 		}
-		
+
 	}
 
 	public void shutdown(@Observes @Destroyed(ApplicationScoped.class) ServletContext init) {

@@ -10,12 +10,12 @@ import edu.stevens.cs548.clinic.domain.ClinicDomainProducer.ClinicDomain;
 import java.util.List;
 import java.util.UUID;
 
-// TODO
+// TODOX
 @RequestScoped
 @Transactional
 public class TreatmentDao implements ITreatmentDao {
 	
-	// TODO
+	// TODOX
 	@Inject
 	@ClinicDomain
 	private EntityManager em;

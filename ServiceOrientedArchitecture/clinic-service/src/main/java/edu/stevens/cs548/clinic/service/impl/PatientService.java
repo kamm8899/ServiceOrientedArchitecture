@@ -17,12 +17,18 @@ import edu.stevens.cs548.clinic.service.IPatientService;
 import edu.stevens.cs548.clinic.service.dto.PatientDto;
 import edu.stevens.cs548.clinic.service.dto.PatientDtoFactory;
 import edu.stevens.cs548.clinic.service.dto.TreatmentDto;
-
+import jakarta.enterprise.context.RequestScoped;
+import jakarta.enterprise.context.SessionScoped;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 
 
 /**
  * CDI Bean implementation class PatientService
  */
+
+@RequestScoped
+@Transactional
 public class PatientService implements IPatientService {
 	
 	@SuppressWarnings("unused")
@@ -38,7 +44,8 @@ public class PatientService implements IPatientService {
 		patientDtoFactory = new PatientDtoFactory();
 	}
 	
-	// TODO
+	// TODOX
+	@Inject
 	private IPatientDao patientDao;
 
 
@@ -83,8 +90,14 @@ public class PatientService implements IPatientService {
 	 * The boolean flag indicates if related treatments should be loaded eagerly.
 	 */
 	public PatientDto getPatient(UUID id, boolean includeTreatments) throws PatientServiceExn {
-		// TODO use DAO to get patient by external key, create DTO that includes treatments
-		return null;
+		// TODOX use DAO to get patient by external key, create DTO that includes treatments
+		PatientDto obj = null;
+		try {
+			obj = patientToDto( patientDao.getPatient(id, includeTreatments), includeTreatments);
+		} catch (TreatmentExn | PatientExn e) {			
+			e.printStackTrace();
+		}
+		return obj;
 	}
 
 	@Override

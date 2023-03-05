@@ -33,19 +33,19 @@ import edu.stevens.cs548.clinic.domain.ITreatmentDao.TreatmentExn;
 		name = "RemoveAllProviders", 
 		query = "delete from Provider p")
 })
-// TODO
+// TODOX
 @Entity
 @Table(indexes = @Index(columnList = "providerId"))
 public class Provider implements Serializable, ITreatmentImporter {
 		
 	private static final long serialVersionUID = -876909316791083094L;
 
-	// TODO JPA annotations
+	// TODOX JPA annotations
 	@Id
 	@GeneratedValue
 	private long id;
 	
-	// TODO
+	// TODOX
 	@Column(nullable = false, unique = true)
 	private UUID providerId;
 	
@@ -85,7 +85,7 @@ public class Provider implements Serializable, ITreatmentImporter {
 		this.name = name;
 	}
 
-	// TODO JPA annotations (propagate deletion of provider to treatments)
+	// TODOX JPA annotations (propagate deletion of provider to treatments)
 	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "provider")
 	private Collection<Treatment> treatments;
 
@@ -114,7 +114,7 @@ public class Provider implements Serializable, ITreatmentImporter {
 	}
 	
 	/**
-	 * TODO complete this operation (see patient entity)
+	 * TODOX complete this operation (see patient entity)
 	 *
 	 * Export a treatment without violating Aggregate pattern.
 	 * Check that the exported treatment is a treatment for this provider.
@@ -145,7 +145,7 @@ public class Provider implements Serializable, ITreatmentImporter {
 
 	private void addTreatment (Treatment t) {
 		/*
-		 * TODO complete this operation (see patient entity)
+		 * TODOX complete this operation (see patient entity)
 		 */
 		treatments.add(t);
 		t.setProvider(this);
@@ -229,9 +229,7 @@ public class Provider implements Serializable, ITreatmentImporter {
 		};
 
 	}
-		// TODO finish this
-
-
+	
 
 	@Override
 	public Consumer<Treatment> importSurgery(UUID tid, Patient patient, Provider provider, String diagnosis, LocalDate date,
@@ -270,15 +268,10 @@ public class Provider implements Serializable, ITreatmentImporter {
 		};
 	}
 
-
-		// TODO finish this
-
-	}
-
 	@Override
 	public Consumer<Treatment> importPhysiotherapy(UUID tid, Patient patient, Provider provider, String diagnosis,
 			List<LocalDate> dates, Consumer<Treatment> consumer) {
-		// TODO finish this
+		// TODOX finish this
 		PhysiotherapyTreatment treatment = treatmentFactory.createPhysiotherapyTreatment();
 		treatment.setTreatmentId(tid);
 		treatment.setDiagnosis(diagnosis);

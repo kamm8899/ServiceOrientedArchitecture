@@ -35,19 +35,19 @@ import edu.stevens.cs548.clinic.domain.ITreatmentDao.TreatmentExn;
 		query = "delete from Patient p")
 })
 
-// TODO
+// TODOX
 @Entity
 @Table(indexes = @Index(columnList = "patientId"))
 public class Patient implements Serializable {
 		
 	private static final long serialVersionUID = -4512912599605407549L;
 
-	// TODO PK
+	// TODOX PK
 	@Id
 	@GeneratedValue
 	private long id;
 	
-	// TODO
+	// TODOX
 	@Column(nullable = false, unique = true)
 	private UUID patientId;
 				
@@ -88,7 +88,7 @@ public class Patient implements Serializable {
 	}
 
 
-	// TODO JPA annotations (propagate deletion of patient to treatments)
+	// TODOX JPA annotations (propagate deletion of patient to treatments)
 	@OneToMany(cascade = CascadeType.PERSIST,mappedBy = "patient")
 	private Collection<Treatment> treatments;
 	

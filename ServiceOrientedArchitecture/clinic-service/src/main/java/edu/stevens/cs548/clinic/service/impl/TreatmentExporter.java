@@ -8,6 +8,9 @@ import java.util.function.Supplier;
 
 import edu.stevens.cs548.clinic.domain.ITreatmentExporter;
 import edu.stevens.cs548.clinic.service.dto.DrugTreatmentDto;
+import edu.stevens.cs548.clinic.service.dto.PhysiotherapyTreatmentDto;
+import edu.stevens.cs548.clinic.service.dto.RadiologyTreatmentDto;
+import edu.stevens.cs548.clinic.service.dto.SurgeryTreatmentDto;
 import edu.stevens.cs548.clinic.service.dto.TreatmentDto;
 import edu.stevens.cs548.clinic.service.dto.TreatmentDtoFactory;
 
@@ -39,9 +42,18 @@ public class TreatmentExporter implements ITreatmentExporter<TreatmentDto> {
 		
 		DrugTreatmentDto dto = factory.createDrugTreatmentDto();
 
-		// TODO
-
-		
+		//TODOX
+		dto.setId(tid);
+		dto.setPatientId(patientId);
+		dto.setPatientName(patientName);
+		dto.setProviderId(providerId);
+		dto.setProviderName(providerName);
+		dto.setDiagnosis(diagnosis);
+		dto.setDosage(dosage);
+		dto.setStartDate(start);
+		dto.setEndDate(end);
+		dto.setFrequency(frequency);
+				
 		if (includeFollowups) {
 			dto.setFollowupTreatments(followups.get());
 		}
@@ -52,30 +64,66 @@ public class TreatmentExporter implements ITreatmentExporter<TreatmentDto> {
 	@Override
 	public TreatmentDto exportRadiology(UUID tid, UUID patientId, String patientName, UUID providerId,
 			String providerName, String diagnosis, List<LocalDate> dates, Supplier<Collection<TreatmentDto>> followups) {
-		// TODO
+		// TODOX
+		RadiologyTreatmentDto dto = factory.createRadiologyTreatmentDto();
+		dto.setId(tid);
+		dto.setPatientId(patientId);
+		dto.setPatientName(patientName);
+		dto.setProviderId(providerId);
+		dto.setProviderName(providerName);
+		dto.setDiagnosis(diagnosis);
+		dto.setTreatmentDates(dates);
 		
-
+		if (includeFollowups) {
+			dto.setFollowupTreatments(followups.get());
+		}
 		
-		return null;
+		return dto;
 	}
 
 	@Override
 	public TreatmentDto exportSurgery(UUID tid, UUID patientId, String patientName, UUID providerId,
 			String providerName, String diagnosis, LocalDate date, String dischargeInstructions, 
 			Supplier<Collection<TreatmentDto>> followups) {
-		// TODO
+		// TODOX
 		
-
+		SurgeryTreatmentDto dto = factory.createSurgeryTreatmentDto();
+		dto.setId(tid);
+		dto.setPatientId(patientId);
+		dto.setPatientName(patientName);
+		dto.setProviderId(providerId);
+		dto.setProviderName(providerName);
+		dto.setDiagnosis(diagnosis);
+		dto.setSurgeryDate(date);
+		dto.setDischargeInstructions(dischargeInstructions);
 		
-		return null;
+		if (includeFollowups) {
+			dto.setFollowupTreatments(followups.get());
+		}
+		
+		return dto;
 	}
 
 	@Override
 	public TreatmentDto exportPhysiotherapy(UUID tid, UUID patientId, String patientName, UUID providerId,
 			String providerName, String diagnosis, List<LocalDate> dates, Supplier<Collection<TreatmentDto>> followups) {
-		// TODO
+		// TODOX
+		
+		PhysiotherapyTreatmentDto dto = factory.createPhysiotherapyTreatmentDto();
+		dto.setId(tid);
+		dto.setPatientId(patientId);
+		dto.setPatientName(patientName);
+		dto.setProviderId(providerId);
+		dto.setProviderName(providerName);
+		dto.setDiagnosis(diagnosis);
+		dto.setTreatmentDates(dates);
+		
+		if (includeFollowups) {
+			dto.setFollowupTreatments(followups.get());
+		}
 
 		
-		return null;	}
+		return dto;	
+		}
 
 }
